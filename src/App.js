@@ -1,14 +1,20 @@
 import React, { Component } from "react";
-import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, signIn } from './actions';
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment, signIn } from "./actions";
+import counterSlice from './counterSlice'
 
+console.log(counterSlice.actions.increment());
+
+const newState = counterSlice.reducer(
+  {value: 10},
+  counterSlice.actions.increment()
+)
+console.log(newState);
 
 function App() {
+
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
-
-  //Enable dispatching an action
   const dispatch = useDispatch();
 
   return (
@@ -16,10 +22,8 @@ function App() {
       <h1>Counter: {counter}</h1>
       <button onClick={() => dispatch(increment())}>+</button>
       <button onClick={() => dispatch(decrement())}>-</button>
-
-      <h1>Is user logged in?: {isLogged ? "Yess" : "No"}</h1>
-      <button onClick={() => dispatch(signIn())}>Log In / Sign out</button>
-      <h2>App is now available</h2>
+      <h1>Log in or not?: {isLogged ? "Yes" : "No"}</h1>
+      <button onClick={() => dispatch(signIn())}>Log In / Sign Out</button>
     </div>
   )
 }
