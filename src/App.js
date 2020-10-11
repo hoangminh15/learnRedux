@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, signIn } from './actions';
 
-
+//Test in detached mode
 function App() {
   const counter = useSelector(state => state.counter);
   const isLogged = useSelector(state => state.isLogged);
